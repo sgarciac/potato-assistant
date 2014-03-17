@@ -162,9 +162,7 @@
                 </TabItem>
 
 
-                <TabItem Header="Reports">
-                    The Mushrooms Tab
-                </TabItem>
+              
 
             </TabControl>
         </DockPanel>
