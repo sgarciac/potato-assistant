@@ -1,0 +1,9 @@
+C:\dev\PotatoAssistant\PotatoAssistantModel\bin\Debug\PotatoAssistantModel.dll
+C:\dev\PotatoAssistant\PotatoAssistantModel\bin\Debug\PotatoAssistantModel.pdb
+C:\dev\PotatoAssistant\PotatoAssistantModel\obj\Debug\PotatoAssistantModel.dll
+C:\dev\PotatoAssistant\PotatoAssistantModel\obj\Debug\PotatoAssistantModel.pdb
+C:\dev\PotatoAssistant\PotatoAssistantModel\obj\Debug\PotatoAssistantModel.csprojResolveAssemblyReference.cache
+C:\work\POTATO\source\PotatoAssistant\PotatoAssistantModel\bin\Debug\PotatoAssistantModel.dll
+C:\work\POTATO\source\PotatoAssistant\PotatoAssistantModel\bin\Debug\PotatoAssistantModel.pdb
+C:\work\POTATO\source\PotatoAssistant\PotatoAssistantModel\obj\Debug\PotatoAssistantModel.dll
+C:\work\POTATO\source\PotatoAssistant\PotatoAssistantModel\obj\Debug\PotatoAssistantModel.pdb

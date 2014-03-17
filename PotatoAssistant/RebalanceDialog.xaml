@@ -1,0 +1,42 @@
+﻿<Window x:Class="PotatoAssistant.RebalanceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rebalance" Height="550" Width="396">
+    <Grid>
+        <Border Grid.Row="0" Padding="2">
+            <Border  BorderBrush="#4E87D4" BorderThickness="2">
+                <DockPanel LastChildFill="True" Background="Azure">
+                    <Border DockPanel.Dock="Top" Height="35" Padding="5" Background="#4E87D4">
+                        <Label Foreground="White" Margin="0,-1,0,1">Rebalance</Label>
+                    </Border>
+
+                    <DockPanel DockPanel.Dock="Bottom">
+                        <Button  Width="152" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="5" Name="OkButton" Click="OkButton_Click">Update With New Values</Button>
+                        <Button  Width="80" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="5" Name="CancelButton" IsCancel="True">Dismiss</Button>
+                    </DockPanel>
+                    <!--Label DockPanel.Dock="Bottom" Foreground="Green" HorizontalAlignment="Right" Name="TotalDeviationLabel">0%</Label-->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Vertical">
+
+                            <DockPanel Margin="2" Name="DescriptionPanel">
+                                <Label HorizontalAlignment="Left" FontSize="12" FontWeight="Bold" Width="250">Fund Name</Label>
+                                <Label HorizontalAlignment="Right" Width="100" FontWeight="Bold" HorizontalContentAlignment="Right">Value</Label>
+                            </DockPanel>
+                            <StackPanel Orientation="Vertical" Name="EditorList">
+                            </StackPanel>
+
+                            <DockPanel Margin="2" Name="SuggestionHeaderPanel" Background="#4E87D4">
+                                <Label Foreground="White" Margin="0,0,0,0">Transfers Suggestion</Label>
+                            </DockPanel>
+
+                            <StackPanel Orientation="Vertical" Name="SuggestionList">
+                            </StackPanel>
+
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

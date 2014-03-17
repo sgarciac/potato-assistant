@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="PotatoAssistant.BalanceEntryDescription"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="750">
+    <DockPanel Margin="2" Name="DescriptionPanel">
+        <Label HorizontalAlignment="Left" FontSize="14" FontStyle="Italic" Width="320" Name="FundLabel">Papas Bonds Holding</Label>
+        <Label HorizontalAlignment="Left" Width="42">Value:</Label>
+        <Label HorizontalAlignment="Left" Name="BalanceValue" Width="100">$50000</Label>
+        <Label HorizontalAlignment="Right" Width="47">Share:</Label>
+        <Label HorizontalAlignment="Left" Width="55" Name="Share" FontWeight="Bold">50.00%</Label>
+        <Label HorizontalAlignment="Left" Width="130" FontStyle="Italic">Deviation From Target:</Label>
+        <Label HorizontalAlignment="Left" Width="70" Name="Deviation" Foreground="Red">-10%</Label>
+        
+    </DockPanel>
+</UserControl>
