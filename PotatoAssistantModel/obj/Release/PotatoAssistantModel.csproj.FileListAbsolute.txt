@@ -1,5 +1,0 @@
-C:\dev\PotatoAssistant\PotatoAssistantModel\bin\Release\PotatoAssistantModel.dll
-C:\dev\PotatoAssistant\PotatoAssistantModel\bin\Release\PotatoAssistantModel.pdb
-C:\dev\PotatoAssistant\PotatoAssistantModel\obj\Release\PotatoAssistantModel.dll
-C:\dev\PotatoAssistant\PotatoAssistantModel\obj\Release\PotatoAssistantModel.pdb
-C:\dev\PotatoAssistant\PotatoAssistantModel\obj\Release\PotatoAssistantModel.csprojResolveAssemblyReference.cache
