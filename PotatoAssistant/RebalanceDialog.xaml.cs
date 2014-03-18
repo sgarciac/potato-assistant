@@ -33,7 +33,7 @@ namespace PotatoAssistant
             foreach (ITarget target in initialValues.Keys)
             {
                 UpdateEditorEntry entry = new UpdateEditorEntry(target, initialValues[target], true);
-                entry.NewValueBox.IsEnabled = false;
+                //entry.NewValueBox.IsEnabled = false;
                 EditorList.Children.Add(entry);
             }
             SuggestionList.Children.Add(new Label() {  Content = "HELLO"});

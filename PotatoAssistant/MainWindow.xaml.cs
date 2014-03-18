@@ -28,17 +28,19 @@ namespace PotatoAssistant
         #region data
         
         // path to the currently open portfolio
-        private string _portfolioPath;
         private string PortfolioPath
         {
-            get { return _portfolioPath; }
+            get { return Properties.Settings.Default.FileName; }
             set
             {
-                _portfolioPath = value;
+                Properties.Settings.Default.FileName = value;
+                Properties.Settings.Default.Save();
                 StatusBar.Text = value;
             }
         }
 
+        //a variable to know if the application has started, and display a "open last file?" dialog
+        bool _firstWindowActivation = true;
         // the portfolio being represented
         private Portfolio _portfolio;
         private Portfolio Portfolio
@@ -65,7 +67,6 @@ namespace PotatoAssistant
             InitializeComponent();
             Portfolio = new Portfolio();
             StatusBar.Text = "Welcome!";
-            
             
 
         }
@@ -171,7 +172,6 @@ namespace PotatoAssistant
                 style.Setters.Add(new Setter(property, brush));
                 rd.Add("DataPointStyle", style);
                 palette.Add(rd);
-                System.Console.WriteLine("Color:" + nextColor.ToRGBString());
             }
             return palette;
         }
@@ -245,6 +245,7 @@ namespace PotatoAssistant
         #endregion
 
         #region open-save
+
         public void OpenPortfolio()
         {
             if (_portfolioNeedsSave && MessageBox.Show("Current portfolio has not been saved. Continue?", "Warning", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
@@ -256,12 +257,12 @@ namespace PotatoAssistant
             dialog.Filter = "Potato Assistant Files (.paxml)|*.paxml";
             if (dialog.ShowDialog() == true)
             {
-                filePath = dialog.FileName;
+                OpenPortfolio(dialog.FileName);
             }
-            else
-            {
-                return;
-            }
+        }
+
+        private void OpenPortfolio(string filePath)
+        {
             try
             {
                 using (StreamReader reader = new StreamReader(filePath))
@@ -274,9 +275,7 @@ namespace PotatoAssistant
             catch (Exception ioexception)
             {
                 MessageBox.Show("Problem opening the portfolio to file." + filePath);
-                
             }
-
         }
 
         public void SavePortfolio()
@@ -302,13 +301,18 @@ namespace PotatoAssistant
                     Portfolio.Marshall(writer);
                     PortfolioPath = filePath;
                     _portfolioNeedsSave = false;
-                    
                 }
             }
             catch (Exception ioexception)
             {
                 MessageBox.Show("Problem saving the portfolio to file." + filePath);
             }
+        }
+
+        public void PlanListChanged()
+        {
+            _portfolioNeedsSave = true;
+            RefreshAllExtraInfosView();
         }
         #endregion
 
@@ -374,49 +378,7 @@ namespace PotatoAssistant
 
         #endregion
 
-        public void PlanListChanged()
-        {
-            _portfolioNeedsSave = true;
-            RefreshAllExtraInfosView();
-            
-        }
-
-        public void RemoveTargetEditor(TargetEditor editor)
-        {
-            TargetsListPanel.Children.Remove(editor);
-            PlanListChanged();
-        }
-
-        private bool LaunchRebalanceDialog()
-        {
-            RebalanceDialog dialog = new RebalanceDialog(Portfolio.GetBalance(true));
-            if (dialog.ShowDialog() == true)
-            {
-                Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
-                RefreshAllExtraInfosView();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        
-        private bool LaunchUpdateDialog()
-        {
-            UpdateDialog dialog = new UpdateDialog(Portfolio.GetBalance(true));
-            if (dialog.ShowDialog() == true)
-            {
-                Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
-                RefreshAllExtraInfosView();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        #region action-buttons
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -445,12 +407,82 @@ namespace PotatoAssistant
 
         }
 
+        public void RemoveTargetEditor(TargetEditor editor)
+        {
+            TargetsListPanel.Children.Remove(editor);
+            PlanListChanged();
+        }
+
+        private bool LaunchRebalanceDialog()
+        {
+            RebalanceDialog dialog = new RebalanceDialog(Portfolio.GetBalance(true));
+            if (dialog.ShowDialog() == true)
+            {
+                Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
+                RefreshAllExtraInfosView();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        private bool LaunchUpdateDialog()
+        {
+            UpdateDialog dialog = new UpdateDialog(Portfolio.GetBalance(true));
+            if (dialog.ShowDialog() == true)
+            {
+                Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
+                RefreshAllExtraInfosView();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+
         private void RebalanceButton_Click(object sender, RoutedEventArgs e)
         {
             LaunchRebalanceDialog();
         }
 
+        #endregion
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            if (_firstWindowActivation)
+            {
+                _firstWindowActivation = false;
+                if (!string.IsNullOrWhiteSpace(PortfolioPath))
+                {
+                    if (File.Exists(PortfolioPath))
+                    {
+                        if (MessageBox.Show(string.Format("Open {0}?", PortfolioPath),
+                                "Open Last Open File",
+                                MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                        {
+                            OpenPortfolio(PortfolioPath);
+                        }
+                    }
+                    else
+                    {
+                        PortfolioPath = "";
+                    }
+                }
+            } 
+        }
+
+     
        
+
+       
+
 
     }
 
