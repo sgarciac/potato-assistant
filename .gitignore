@@ -1,11 +1,7 @@
-./PotatoAssistantModel/bin/
-./PotatoAssistantModel/obj/
-./PotatoAssistant/bin/
-./PotatoAssistant/obj/
-./PotatoAssistantModel/bin/*
-./PotatoAssistantModel/obj/*
-./PotatoAssistant/bin/*
-./PotatoAssistant/obj/*
-./PotatoAssistant.v12.suo
+PotatoAssistantModel/bin/
+PotatoAssistantModel/obj/
+PotatoAssistant/bin/
+PotatoAssistant/obj/
+PotatoAssistant.v12.suo
   
  
