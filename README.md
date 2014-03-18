@@ -1,0 +1,1 @@
+A windows application to assist rebalancing an investing portfolio.
