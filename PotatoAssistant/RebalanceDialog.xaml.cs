@@ -30,13 +30,54 @@ namespace PotatoAssistant
         public RebalanceDialog(Dictionary<ITarget, double> initialValues)
         {
             InitializeComponent();
+            double total = initialValues.Values.Sum();
+            Dictionary<ITarget, double> goals = new Dictionary<ITarget, double>();
+            Dictionary<ITarget, double> current = new Dictionary<ITarget,double>(initialValues);
+
             foreach (ITarget target in initialValues.Keys)
             {
-                UpdateEditorEntry entry = new UpdateEditorEntry(target, initialValues[target], true);
-                //entry.NewValueBox.IsEnabled = false;
+                goals[target] = (total * target.Share) / 100;
+                UpdateEditorEntry entry = new UpdateEditorEntry(target, Math.Floor(goals[target]), true);
                 EditorList.Children.Add(entry);
             }
-            SuggestionList.Children.Add(new Label() {  Content = "HELLO"});
+            //Create a suggestions list
+            List<Tuple<ITarget, ITarget, double>> transfers = new List<Tuple<ITarget, ITarget, double>>(); 
+            bool changed = true;
+            while (changed)
+            {
+                changed = false;
+                // find the value that differs the most from the goal
+                ITarget worstSuperavit = current.Keys.First();
+                ITarget worstDeficit = current.Keys.First();
+                
+                foreach (KeyValuePair<ITarget, double> kvp in current)
+                {
+                    if ((kvp.Value - goals[kvp.Key]) > (current[worstSuperavit] - goals[worstSuperavit]))
+                    {
+                        worstSuperavit = kvp.Key;
+                    }
+                    if ((kvp.Value - goals[kvp.Key]) < (current[worstDeficit] - goals[worstDeficit]))
+                    {
+                        worstDeficit = kvp.Key;
+                    }
+                }
+                if (current[worstDeficit] < goals[worstDeficit])
+                {
+                    double transferValue = Math.Min(Math.Abs(goals[worstDeficit] - current[worstDeficit]), Math.Abs(current[worstSuperavit] - goals[worstSuperavit]));
+                    if (transferValue > 0)
+                    {
+                        current[worstDeficit] = current[worstDeficit] + transferValue;
+                        current[worstSuperavit] = current[worstSuperavit] - transferValue;
+                        transfers.Add(new Tuple<ITarget, ITarget, double>(worstSuperavit, worstDeficit, transferValue));
+                        changed = true;
+                    }
+                }
+            }
+
+            foreach (Tuple<ITarget, ITarget, double> transfer in transfers)
+            {
+                SuggestionList.Children.Add(new TransferSuggestion(transfer.Item1.FundName, transfer.Item2.FundName, transfer.Item3));
+            }
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)

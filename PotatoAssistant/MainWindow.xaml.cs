@@ -309,6 +309,11 @@ namespace PotatoAssistant
             }
         }
 
+        public void HistoryChanged(){
+            _portfolioNeedsSave = true;
+            RefreshAllExtraInfosView();
+        }
+
         public void PlanListChanged()
         {
             _portfolioNeedsSave = true;
@@ -353,7 +358,7 @@ namespace PotatoAssistant
             {
                 TemplateChooser chooser = new TemplateChooser();
                 Dictionary<string, double> shares = new Dictionary<string, double>();
-                Portfolio.Plan = new Plan();
+                Portfolio = new Portfolio();
                 if ((chooser.ShowDialog() == true) && (chooser.SelectedTemplate!=null))
                 {
                     foreach(KeyValuePair<string, double> target in chooser.SelectedTemplate.Targets)
@@ -365,6 +370,8 @@ namespace PotatoAssistant
                     Portfolio.Plan.SetTargetShares(shares);
                     ReloadPlanList();
                 }
+                PortfolioPath = "";
+                StatusBar.Text = string.Format("Template {0} loaded.", chooser.SelectedTemplate.Name);
             }
         }
 
@@ -394,7 +401,7 @@ namespace PotatoAssistant
                 if (dialog.ShowDialog() == true)
                 {
                     Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
-                    RefreshAllExtraInfosView();
+                    HistoryChanged();
                 }
             }
             else
@@ -419,7 +426,7 @@ namespace PotatoAssistant
             if (dialog.ShowDialog() == true)
             {
                 Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
-                RefreshAllExtraInfosView();
+                HistoryChanged();
                 return true;
             }
             else
@@ -435,7 +442,7 @@ namespace PotatoAssistant
             if (dialog.ShowDialog() == true)
             {
                 Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
-                RefreshAllExtraInfosView();
+                HistoryChanged();
                 return true;
             }
             else
@@ -478,13 +485,21 @@ namespace PotatoAssistant
             } 
         }
 
-     
-       
-
-       
-
-
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_portfolioNeedsSave)
+            {
+                MessageBoxResult result = MessageBox.Show("Save file?","Closing",
+                               MessageBoxButton.YesNoCancel);
+                if (result  == MessageBoxResult.Yes)
+                {
+                    SavePortfolio();
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
-
-
 }

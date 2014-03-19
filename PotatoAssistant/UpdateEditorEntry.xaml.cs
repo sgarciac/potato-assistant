@@ -56,8 +56,8 @@ namespace PotatoAssistant
 
         private void refreshColor()
         {
-           SolidColorBrush bgBrush = new SolidColorBrush((NewValue == _initialValue) ? Colors.White : Colors.Orange);
-           SolidColorBrush fgBrush = new SolidColorBrush((NewValue == _initialValue) ? Colors.Black : Colors.White);
+           SolidColorBrush bgBrush = new SolidColorBrush((NewValue == _initialValue) ? Colors.White : Colors.LightBlue);
+           SolidColorBrush fgBrush = new SolidColorBrush(Colors.Black);
            NewValueBox.Background = bgBrush;
            NewValueBox.Foreground = fgBrush;
         }

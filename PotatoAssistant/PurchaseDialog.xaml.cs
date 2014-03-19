@@ -79,8 +79,9 @@ namespace PotatoAssistant
                 totalDeviation += Math.Abs(share - target.Share);
                 _editors[target].SetCurrentShareDev(share - target.Share);
             }
-            DeviationOldLabel.Content = String.Format("Total Current Deviation: {0:0.00}%", totalDeviation);
-        }
+            string text = double.IsNaN(totalDeviation) ? "" : String.Format("Total Current Deviation: {0:0.00}%", totalDeviation);
+            DeviationOldLabel.Content = text;
+       } 
 
         private void UpdateNewValueAndShare()
         {
@@ -100,7 +101,8 @@ namespace PotatoAssistant
                 _editors[target].SetUpdatedShareDev(share - target.Share);
                 _editors[target].SetUpdatedValue(value);
             }
-            DeviationNewLabel.Content = String.Format("Total Deviation After Purchase: {0:0.00}%", totalDeviation);
+            string text = double.IsNaN(totalDeviation) ? "" : String.Format("Total Deviation After Purchase: {0:0.00}%", totalDeviation); 
+            DeviationNewLabel.Content = text;
 
         }
 

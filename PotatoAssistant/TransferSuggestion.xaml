@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="PotatoAssistant.TransferSuggestion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="450">
+    <DockPanel Margin="2" Name="DescriptionPanel">
+        <Label HorizontalAlignment="Left" FontSize="14" FontStyle="Italic" Foreground="green" Width="160" Name="FundLabel1">Papas Bonds Holding 1</Label>
+        <Label HorizontalAlignment="Left" Width="24">→</Label>
+        <Label HorizontalAlignment="Left" FontSize="14" FontStyle="Italic" Foreground="red" Width="160" Name="FundLabel2">Papas Bonds Holding2 </Label>
+        <Label HorizontalAlignment="Right" Width="47" Name="TransferValue" >10</Label>
+        
+    </DockPanel>
+</UserControl>

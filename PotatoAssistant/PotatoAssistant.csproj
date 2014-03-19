@@ -61,6 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TransferSuggestion.xaml.cs">
+      <DependentUpon>TransferSuggestion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BalanceEntryDescription.xaml.cs">
       <DependentUpon>BalanceEntryDescription.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
       <DependentUpon>UpdateEditorEntry.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <Page Include="TransferSuggestion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="BalanceEntryDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

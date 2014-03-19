@@ -53,22 +53,38 @@ namespace PotatoAssistant
             CurrentValueLabel.Content = String.Format("{0:C}", value);
         }
 
-        public void SetCurrentShareDev(double share)
-        {
-            CurrentValueShareDevLabel.Content = String.Format("{0:0.00}%", share);
-            CurrentValueShareDevLabel.Foreground = new SolidColorBrush(Utils.BalanceColor(share));
-        }
 
         public void SetUpdatedValue(double value)
         {
             UpdatedValueLabel.Content = String.Format("{0:C}", value);
         }
 
+
+        public void SetCurrentShareDev(double share)
+        {
+            SetShareLabel(share, CurrentValueShareDevLabel);
+        }
+
         public void SetUpdatedShareDev(double share)
         {
-            UpdatedValueShareLabel.Content = String.Format("{0:0.00}%", share);
-            UpdatedValueShareLabel.Foreground = new SolidColorBrush(Utils.BalanceColor(share)); 
+            SetShareLabel(share, UpdatedValueShareLabel);
         }
+
+
+        private void SetShareLabel(double share, Label label)
+        {
+            string text = "-";
+            SolidColorBrush brush = new SolidColorBrush(Colors.Black);
+            if (!double.IsNaN(share))
+            {
+                text = String.Format("{0:0.00}%", share);
+                brush = new SolidColorBrush(Utils.BalanceColor(share));
+            }
+            label.Content = text;
+            label.Foreground = brush;
+        }
+
+        
 
 
 
@@ -85,8 +101,8 @@ namespace PotatoAssistant
 
         private void refreshColor()
         {
-           SolidColorBrush bgBrush = new SolidColorBrush((NewValue == _initialInvestmentValues) ? Colors.White : Colors.Orange);
-           SolidColorBrush fgBrush = new SolidColorBrush((NewValue == _initialInvestmentValues) ? Colors.Black : Colors.White);
+           SolidColorBrush bgBrush = new SolidColorBrush((NewValue == _initialInvestmentValues) ? Colors.White : Colors.LightBlue);
+           SolidColorBrush fgBrush = new SolidColorBrush(Colors.Black);
            InvestmentTextBox.Background = bgBrush;
            InvestmentTextBox.Foreground = fgBrush;
         }

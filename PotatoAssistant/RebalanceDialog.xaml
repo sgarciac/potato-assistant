@@ -1,7 +1,7 @@
 ﻿<Window x:Class="PotatoAssistant.RebalanceDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Rebalance" Height="550" Width="396">
+        Title="Rebalance" Height="550" Width="600">
     <Grid>
         <Border Grid.Row="0" Padding="2">
             <Border  BorderBrush="#4E87D4" BorderThickness="2">
