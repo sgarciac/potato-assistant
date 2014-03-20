@@ -17,6 +17,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Drawing;
 using System.Windows.Controls.DataVisualization.Charting;
+using System.Reflection;
 
 namespace PotatoAssistant
 {
@@ -67,6 +68,8 @@ namespace PotatoAssistant
             InitializeComponent();
             Portfolio = new Portfolio();
             StatusBar.Text = "Welcome!";
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            Title = version.ToString();
             
 
         }

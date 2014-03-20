@@ -119,7 +119,7 @@ namespace PotatoAssistant
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Utils.ValidateNumeric(sender, e, false);
+            Utils.ValidateNumeric((TextBox)sender, e, false);
         }
 
         /// <summary>

@@ -51,7 +51,7 @@ namespace PotatoAssistant
 
         private void Balance_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Utils.ValidateNumeric(sender, e, false);
+            Utils.ValidateNumeric((TextBox)sender, e, false);
         }
 
         private void refreshColor()
