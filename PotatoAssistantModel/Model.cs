@@ -461,32 +461,53 @@ namespace PotatoAssistantModel
     }
 
     /// <summary>
-    /// this class represents and actions of purchasing or selling 
+    /// this class represents and actions of purchasing 
     /// </summary>
-    public class Transaction : Entry
+    public class Purchase : Entry
     {
         
-        public Transaction(DateTime time, Dictionary<string, double> values)
+        public Purchase(DateTime time, Dictionary<string, double> values)
             : base(time, values)
         {
         }
 
-        public static Transaction Unmarshall(DateTime time, string[] args)
+        public static Purchase Unmarshall(DateTime time, string[] args)
         {
             Dictionary<string, double> values = ExtractValues(args);
-            return new Transaction(time, values);
+            return new Purchase(time, values);
         }
     }
+
+
+    /// <summary>
+    /// this class represents a rebalance operation 
+    /// </summary>
+    public class Rebalance : Entry
+    {
+
+        public Rebalance(DateTime time, Dictionary<string, double> values)
+            : base(time, values)
+        {
+        }
+
+        public static Purchase Unmarshall(DateTime time, string[] args)
+        {
+            Dictionary<string, double> values = ExtractValues(args);
+            return new Purchase(time, values);
+        }
+    }
+
 
     public class History : IEnumerable<Entry>
     {
 
         #region entries-marshalling-infrastructure
         public delegate Entry ReadEntry(DateTime time, string [] args);
-        private static Dictionary<Type, string> TypeNames = new Dictionary<Type,string>(){{typeof(Update), "UPDATE"}, {typeof(Transaction), "TRANSACTION"}};
+        private static Dictionary<Type, string> TypeNames = new Dictionary<Type,string>(){{typeof(Update), "UPDATE"},{typeof(Rebalance), "REBALANCE"}, {typeof(Purchase), "PURCHASE"}};
         private static Dictionary<string, ReadEntry> Readers = new Dictionary<string, ReadEntry>(){
             {"UPDATE", (DateTime time,string[] args) => {return Update.Unmarshall(time, args);}},
-            {"TRANSACTION", (DateTime time,string[] args) => {return Transaction.Unmarshall(time, args);}}
+            {"PURCHASE", (DateTime time,string[] args) => {return Purchase.Unmarshall(time, args);}},
+            {"REBALANCE", (DateTime time,string[] args) => {return Purchase.Unmarshall(time, args);}}
         };
         #endregion
 

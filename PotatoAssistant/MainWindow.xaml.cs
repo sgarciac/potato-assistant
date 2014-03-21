@@ -69,7 +69,7 @@ namespace PotatoAssistant
             Portfolio = new Portfolio();
             StatusBar.Text = "Welcome!";
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            Title = version.ToString();
+            Title = "Potato-Assistant "+version.ToString();
             
 
         }
@@ -403,7 +403,7 @@ namespace PotatoAssistant
                 PurchaseDialog dialog = new PurchaseDialog(Portfolio.GetBalance(false));
                 if (dialog.ShowDialog() == true)
                 {
-                    Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
+                    Portfolio.History.AddEntry(new Purchase(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
                     HistoryChanged();
                 }
             }
@@ -428,7 +428,7 @@ namespace PotatoAssistant
             RebalanceDialog dialog = new RebalanceDialog(Portfolio.GetBalance(true));
             if (dialog.ShowDialog() == true)
             {
-                Portfolio.History.AddEntry(new Update(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
+                Portfolio.History.AddEntry(new Rebalance(DateTime.Now, dialog.NewValues.ToDictionary(kp => kp.Key.ID, kp => kp.Value)));
                 HistoryChanged();
                 return true;
             }
