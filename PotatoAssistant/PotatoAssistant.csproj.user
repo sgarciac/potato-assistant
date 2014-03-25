@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory />
-    <InstallUrlHistory />
+    <PublishUrlHistory>C:\Users\sgarcia\Documents\GitHub\potato-assistant-page\releases\</PublishUrlHistory>
+    <InstallUrlHistory>http://sgarciac.github.io/potato-assistant/releases/|https://sgarciac.github.io/potato-assistant/releases/|https://github.com/sgarciac/potato-assistant/releases/</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />

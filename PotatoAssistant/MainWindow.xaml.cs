@@ -69,7 +69,7 @@ namespace PotatoAssistant
             Portfolio = new Portfolio();
             StatusBar.Text = "Welcome!";
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            Title = "Potato-Assistant "+version.ToString();
+            Title = "Potato-Assistant v"+version.ToString();
             
 
         }
